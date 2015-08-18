@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
   	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-  	<link rel="stylesheet" href="main.css">
+  	<link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='main.css') }}"/>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,13 +10,23 @@
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js"></script>
+    <link type="text/js" href="{{ url_for('static', filename='bootstrap.min.js') }}"/>
     <title>Create your Survey</title>
     
   </head>
   
   <body>
-  
+  	<div class='nav nav-pills'>
+		<div class='container'>
+	
+			{% if g.user.is_authenticated() %}
+			<ul class="pull-right">
+        		<li><a href="{{ url_for('logout') }}">Logout</a></li>
+    		{% endif %}
+    		</ul>
+    	</div>
+    </div>
+	<hr>
   	<div class = "jumbotron">
   		<h2 align = "center">Post your video/audio links</h2>
   	</div>
@@ -50,22 +60,33 @@
 			
      		}); 
      	
-     		//$("#getButtonValue").click(function () {
-		
-			var msg = '';
-			for(i=1; i<counter; i++){
-   	  			msg += "\n Textbox #" + i + " : " + $('#textbox' + i).val();
-			}
-    	  
-     		//});
+     
      		$("#submitbutton").click(function () {
+     			var msg = '';
+				for(i=1; i<counter; i++){
+   	  				msg += "\n " + $('#textbox' + i).val();
+   	  			}
+   	  		
+   	  			$.ajax({
+    				url: "/index",
+    				type: "POST",
+    				data: JSON.stringify(msg),
+    				contentType: "application/json; charset=utf-8",
+    				success: function(dat) { console.log(dat); }
+				});
+   	  			console.log(msg)
      			alert("Videos added to the server");
      		});
-     		
+     		 		
   		});
   	</script>
   	<div class = "container">
   		<div id='TextBoxesGroup'>
+  		<style type="text/css">
+ 			div{
+ 				padding:8px;
+ 				}
+		</style>
 			<div id="TextBoxDiv1">
 				<input type='textbox' class="form-control" placeholder="Audio/video link" id='textbox1' >	
 			</div>
