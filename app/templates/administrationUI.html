@@ -1,32 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-  	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-  	<link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='main.css') }}"/>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <link type="text/js" href="{{ url_for('static', filename='bootstrap.min.js') }}"/>
-    <title>Create your Survey</title>
-    
-  </head>
-  
-  <body>
-  	<div class='nav nav-pills'>
-		<div class='container'>
-	
-			{% if g.user.is_authenticated() %}
-			<ul class="pull-right">
-        		<li><a href="{{ url_for('logout') }}">Logout</a></li>
-    		{% endif %}
-    		</ul>
-    	</div>
-    </div>
-	<hr>
+<!-- extend base layout -->
+{% extends "base.html" %}
+
+{% block content %}
+  	
   	<div class = "jumbotron">
   		<h2 align = "center">Post your video/audio links</h2>
   	</div>
@@ -98,6 +74,4 @@
   			<button class="btn btn-default" id= 'submitbutton' type="submit"><span class="glyphicon glyphicon-ok" aria-hidden="true"></button>
   		</div>
   	</div>
-  	
-  </body>
-</html>
+{% endblock %}

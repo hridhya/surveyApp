@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+	
+	<link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='main.css') }}"/>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    
+	{%if title %}
+		<title>{{title}} - Survey</title>
+	{% else %}
+		<title>Survey Meddle</title>
+	{% endif%}
+</head>
+<body>
+	<div class='nav nav-pills'>
+		<div class='container'>
+			<ul class="pull-left">
+				{% if g.user.is_authenticated() %}
+				<li><a href = '/index' > <span class="glyphicon glyphicon-home" aria-hidden="true"></span> </a></li>
+		
+			</ul>
+			<ul class="pull-right">
+        		<li><a href="{{ url_for('logout') }}">Logout</a></li>
+    			{% endif %}
+    		</ul>
+    	</div>
+    </div>
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul>
+        {% for message in messages %}
+            <li>{{ message }} </li>
+        {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+	{% block content %}{% endblock %}
+</body>
+</html>
