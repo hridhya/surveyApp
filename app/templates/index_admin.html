@@ -1,6 +1,18 @@
 {% extends "base.html" %}
 
 {% block content %}
+
+<script type=text/javascript>
+    $(function() {
+		$.getJSON('/survey_results', function(data) {
+			console.log(data.result[0]);
+			$("#result0").text(data.result[0]);
+			$("#result1").text(data.result[1]);
+			$("#result2").text(data.result[2]);
+			$("#result3").text(data.result[3]);
+          });
+    });
+</script>
 <hr>
 </br>
 </br>
@@ -25,15 +37,12 @@
     				</div>
     				<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
       					<div class="panel-body">
-        				105 people took this survey.</br>
-        				1.What part of the video helped to identify: </br>
-        				2.Audio or Video: </br>
-        				3.How confident are you: </br>
+        				<strong><span id="result0"></span></strong> people took this survey.</br>
+        				1.What part of the video helped to identify: <strong><span id="result1"></span></strong></br>
+        				2.Audio or Video: <strong><span id="result2"></span></strong></br>
+        				3.How confident are you: <strong><span id="result3"></span></strong></br>
         				<div id="container1" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
         				23 <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true">
-        				
-        					
-        				
       					</div>
     				</div>
   				</div>

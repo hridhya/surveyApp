@@ -15,24 +15,43 @@ function set_openid(openid, pr)
     form.elements['openid'].value = openid
 }
 </script>
+
 <div class = 'signin'>
-<div class = 'container'>
-<h1>Sign In</h1>
-<form action="" method="post" name="login">
-    {{ form.hidden_tag() }}
-    <p>
-        Please enter your OpenID, or select one of the providers below:<br>
-        {{ form.openid(size=80) }}
-        {% for error in form.openid.errors %}
-          <span style="color: red;">[{{error}}]</span>
-        {% endfor %}<br>
-        |{% for pr in providers %}
-          <a href="javascript:set_openid('{{ pr.url }}', '{{ pr.name }}');">{{ pr.name }}</a> |
-        {% endfor %}
-    </p>
-    
-    <p><input type="submit" value="Sign In"></p>
-</form>
-</div>
+	<div class = 'container'>
+	<h1 align="center"> SURVEY MEDDLE </h1>
+		</br>
+		</br>
+			<p>This is a Survey app. Survey is aimed completely for crowd based audio/video detection.
+			Once you sign-up, you will be taken to a home page where any number of surveys can be created.
+			As many as 10 audio/video links can be posted in a single survey. Once a survey is submitted, you
+			will be given a url which could be send to as many people you like. They can participate without needing to
+			sign-up, annonymously.
+			The results of a survey can be viewed in detail on your home page.
+			</br>
+			<h4><i>HAPPY SURVEY MEDDLING!!!</i></h4>
+			<hr>
+			</br>
+			</br>
+			</br>
+			<h4>Sign In</h4>
+				<form action="" method="post" name="login">
+   				 {{ form.hidden_tag() }}
+    				<p>
+        				Please enter your OpenID, or select one of the providers below:<br>
+        				{{ form.openid(size=80) }}
+        				{% for error in form.openid.errors %}
+          					<span style="color: red;">[{{error}}]</span>
+        				{% endfor %}<br>
+        				|{% for pr in providers %}
+          				<a href="javascript:set_openid('{{ pr.url }}', '{{ pr.name }}');">{{ pr.name }}</a> |
+        				{% endfor %}
+    				</p>
+    				<p><input type="submit" value="Sign In"></p>
+				</form>
+				</br>
+				</br>
+ 				</br>
+       
+    </div>
 </div>
 {% endblock %}

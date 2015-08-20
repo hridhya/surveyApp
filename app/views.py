@@ -3,8 +3,9 @@ from flask.ext.login import login_user, logout_user, current_user, \
     login_required
 from app import app, db, lm, oid
 from .forms import LoginForm
-from .models import User
+from .models import User, Survey
 from datetime import datetime
+from flask import jsonify
 
 @lm.user_loader
 def load_user(id):
@@ -51,10 +52,6 @@ def new():
 	user = g.user
 	return render_template('administrationUI.html',user=user)
 	
-@app.route('/takeasurvey')
-def new_survey():
-	return render_template('index_user.html')
-
 @app.route('/create_new', methods=['POST'])
 @login_required
 def my_posts():
@@ -63,7 +60,25 @@ def my_posts():
 	survey = Survey(post1 = words[0])
 	db.session.add(survey)
 	db.session.commit()
-	return data         
+	
+	
+@app.route('/takeasurvey')
+def new_survey():
+	return render_template('index_user.html')
+	
+@app.route('/takeasurvey', methods=['POST'])
+def results() :
+	data = str(request.get_json())
+	words = data.split()
+	print words
+	return data	
+
+
+@app.route('/survey_results')
+@login_required
+def survey_results():
+	lst = [100, "song", "audio", 3]
+	return jsonify(result=lst)         
 
 
 @oid.after_login
